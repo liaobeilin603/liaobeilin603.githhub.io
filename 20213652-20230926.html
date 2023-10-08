@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaWebHomework2</title>
+    <style>
+        body{
+            font: 16px "simhei", Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+        }
+        body>div{
+            width: 1000px;
+            background-color: white;
+            margin: 0 auto;/*块级元素居中*/
+            overflow: hidden;/*解决上部元素粘连问题*/
+        }
+        #top{
+            background-color: white;
+            color: #606266;
+            font-size: 25px;
+            font-weight: 600;
+        }
+        body>div>div{
+            margin: 20px;
+        }
+        #main>div{
+            background-color: #E8E8E8;
+            padding: 16px;
+            font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, SimHei, SimSun;
+            margin:12px 40px;
+        }
+        .main_z_z{
+            background-color: #f5f5f5;
+        }
+        h3{
+            color: #4f4f4f;
+            margin: 8px 0 16px 0;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 26px;
+        }
+        h4{
+            padding: 5px;
+        }
+        li{
+            margin-bottom: 5px;
+        }
+        img{
+            width: 25px;
+            float: right;
+        }
+        #xuehao{
+            float:right;
+            margin-right: 10px;
+        }
+        .main_p{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="top">
+        <span>实验报告</span>
+        <img src="https://img0.baidu.com/it/u=2407773217,1248198690&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" alt="">
+        <span id="xuehao">20213652</span>
+        <hr>
+    </div>
+    <div id="main">
+        <h3>Gitbash基础操作</h3>
+        <h3>一、简介</h3>
+        <div class="main_z">
+            <ul>
+                <li>关于Gitbash的基础知识和基本命令行的简单介绍</li>
+                <li>使用GitBash实现查看，查找指定数据等文件</li>
+            </ul>
+        </div>
+        <h3>二、命令</h3>
+        <div class="main_z">
+			<h4>一、命令解释</h4>
+            <ol>
+				<li>curl:在命令行或脚本中用于传输数据</li>
+				<li>ping：测试与另一台计算机之间的连接和延迟</li>
+				<li>tracert：“tracert主机地址"，可以用来追踪到目的主机地址的路由路径。</li>
+				<li>wc：在Linux中可以获取指定文件中的字节数，字数，行数，并返回统计结果</li>
+				<li>grep：用来查看文件包含内容，该命令主要用于查找文件里符合条件的字符串</li>
+				<li>grep '^tor'：表示文件中查看tor在前面的单词</li>
+				<li>cut --delimiter=：后面接字符，表示从这个字符分割</li>
+				<li>cut --delimiter=/ -f1：表示切割文件中所有的“/”，-f1表示提取"/"前面的单词</li>
+				<li>cut --delimiter=/ -f2：切割（提取）“/”后面的英标</li>
+				<li>cut --delimiter=/ -f3：切割（提取）“/”后面的意思</li>
+            </ol>
+			<h4>二、命令行</h4>
+			<ol>
+				<li> curl https://lijianhong19720904.github.io/WebAdv/kc00/cet6.txt
+</li>
+				<li> curl https://lijianhong19720904.github.io/WebAdv/kc00/cet6.txt>cet6.txt</li>
+				<li>ping github.com</li>
+				<li>tracert pku.edu.cn</li>
+				<li>curl https://lijianhong19720904.github.io/WebAdv/kc00/cet6.txt | wc</li>
+				<li>less cet6.txt</li>
+				<li>grep apple cet6.txt</li>
+				<li>grep tor cet6.txt | less</li>
+				<li> grep '^tor' cet6.txt</li>
+				<li> grep 'tor$' cet6.txt</li>
+				<li>cut --help | less</li>
+				<li>cut --delimiter=/ -f1 cet6.txt</li>
+				<li>cut --delimiter=/ -f1 cet6.txt | grep 'tor$'</li>
+				<li>cut --delimiter=/ -f2 cet6.txt</li>
+				<li> cut --delimiter=/ -f3 cet6.txt</li>
+			</ol>
+            <p>
+                补充：<br>
+                1、利用*.文件拓展名可以实现一次性对同一类型文件的处理。
+            </p>
+        </div>
+        <h3>三、总结</h3>
+        <div class="main_z">
+            <p>gitbash是一个在windows系统上运行Git命令的工具，通过使用命令行实现对计算机的操作，更加接近于计算机的底层。</p>
+        </div>
+        <h3>四、补充:如何从本地上传文件到GitHub上？</h3>
+        <div class="main_z">
+            <ol>
+                <li>step1：初始化本地项目</li>
+                <div class="main_z_z">
+                    <p class="main_p">git init</p>
+                </div>
+                <li>step2：将文件夹中的文件传至git仓库中</li>
+                <div class="main_z_z">
+                    <p class="main_p">git add</p>
+                </div>
+                <li>step3：将项目提交到git仓库（commit项目）</li>
+                <div class="main_z_z">
+                    <p class="main_p">git commit -m "注释"</p>
+                </div>
+                <li>step4：新建分支</li>
+                <div class="main_z_z">
+                    <p class="main_p">git branch -M main</p>
+                </div>
+                <li>step5：将本地仓库（.git）和gitHub上的仓库进行关联</li>
+                <div class="main_z_z">
+                    <p class="main_p">git remote add origin gitHub仓库地址</p>
+                </div>
+                <li>step6：将本地仓库的项目push到gitHub的远程仓库上</li>
+                <div class="main_z_z">
+                    <p class="main_p">git push -u origin main</p>
+                </div>
+
+            </ol>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
