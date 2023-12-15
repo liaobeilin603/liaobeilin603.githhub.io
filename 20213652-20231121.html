@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>播放器</title>
+  <style type="text/css">
+	body{
+		margin:20px;
+	}
+	button,input{
+		width:6em;
+		height:5em;
+        margin:20px;
+		/* color:gray; */
+
+	}
+    div#logo{
+        background-color: red;
+        color: white;
+        position: absolute;
+        padding: 10px 30px;
+        right: 0;
+        top: 1em ; 
+        font-size: 3em;
+
+    }
+	div#time{
+        background-color: blue;
+        color: white;
+        position: absolute;
+        padding: 10px 20px;
+        left:0;
+        top: 1em;
+    }
+    button#switch{
+        width: 160px;
+        font-size: 26px;
+        height: 120px;
+        background-color: black;
+        color: rgb(100, 255, 150);
+        cursor: pointer;
+    }
+    div#UI{
+	 position:relative ;
+	 left: 0 ;
+	 top: 3em ;
+	}
+
+ </style>
+ </head>
+ <script src="mediaData.js">
+    
+</script>
+ <body>
+	<div id="logo"> </div>
+    <div id="time"></div>
+    <div id="stage">
+       <audio id = "myAudio"></audio>
+       <video  id="myVideo"></video>
+    </div>
+    
+     <div id="UI" >
+      <button id="play">Play</button>
+      <button id="previous">Previous</button>
+      <button id="pause">Pause</button>
+      <button id="next">Next</button>
+      <button id="switch">视频</button>
+     </div>
+ 
+
+
+<script>
+    //建立Model模拟播放对象，管理对象的一切属性和行为
+    var Model = {
+       i : 0 ,
+       j : 0,
+       isVideo : true ,
+       UI : {
+            stageDom : document.getElementById("stage") ,
+            videoDom : document.getElementById("myVideo") ,
+            timeDom : document.getElementById("time"), 
+            audioDom : document.getElementById("myAudio"),
+            logoDom : document.getElementById("logo") ,
+            //下面是按牛
+            playDom : document.getElementById("play") ,
+            pauseDom : document.getElementById("pause") ,
+            prevDom : document.getElementById("previous") ,
+            nextDom : document.getElementById("next") ,
+            switchDom : document.getElementById("switch") ,
+            } ,
+        play : function(){
+            Model.isVideo ? Model.UI.videoDom.play() : Model.UI.audioDom.play();
+            Model.mediaInfo() ;
+            Model.timeInfo() ;
+        },
+        pause :function(){
+            Model.isVideo ?  Model.UI.videoDom.pause() :  Model.UI.audioDom.pause() ;
+        
+        },
+        prev :function(){
+            Model.i -- ;
+            
+            Model.j--;
+            let j=Model.j;
+            
+            let i = Model.i ;
+           
+            Model.mediaInfo() ;
+            Model.timeInfo() ;
+            Model.loadMedia() ;
+            
+  
+            Model.play() ;
+        },
+        next :function(){
+            Model.i ++ ;
+            Model.j++;
+            let j=Model.j;
+            let i = Model.i ; 
+            Model.mediaInfo() ;
+            
+            Model.timeInfo() ; 
+            Model.loadMedia() ;
+            Model.play() ;
+        
+        },
+        mediaInfo : function(){
+            let mediaNum = Model.isVideo ? mediaData.videoFileNames.length  : mediaData.podFileStruct.length ;
+  
+            Model.UI.logoDom.textContent =  'NO.'+(Model.i+1) + '/' + mediaNum	  ;
+        } , 
+        timeInfo : function(){
+            let mediaTime = Model.isVideo ? Model.UI.videoDom.duration  : Model.UI.audioDom.duration ;
+            mediaTime = parseInt(mediaTime) ;
+    
+            let currentTime = Model.isVideo ? Model.UI.videoDom.currentTime  : Model.UI.audioDom.currentTime  ;
+    
+            currentTime = parseInt(currentTime) ;
+            Model.UI.timeDom.textContent =  currentTime + ' s' + '/' + mediaTime	+ ' s'  ;
+        } , 
+       
+       loadMedia : function(){
+            let i = Model.i ;
+            if (Model.isVideo) {
+                Model.UI.videoDom.src = mediaData.videoPath +  mediaData. videoFileNames[i] ;
+            }else{
+                Model.UI.audioDom.src =  mediaData.podPath +  mediaData.podFileStruct[i].fileName ;
+            }
+        },
+  
+        init  : function(){
+        //视频UI全屏设置
+        let browserWidth = document.body.clientWidth ;
+            Model.UI.videoDom.style.width = browserWidth + 'px' ;
+  
+            Model.UI.stageDom.style.width = browserWidth + 'px' ;
+  
+            Model.UI.stageDom.style.height = Model.UI.videoDom.clientHeight  + 'px' ;
+       
+        //预读媒体文件
+         
+            Model.loadMedia(0) ;
+         
+         //初始化UI的控件的onclick属性
+  
+          //下面是异步执行的代码
+        Model.UI.playDom.onclick = function(){
+            Model.play() ;
+        } ;
+  
+        Model.UI.pauseDom.onclick = function(){
+            Model.pause() ;
+        } ;
+        Model.UI.prevDom.onclick = function(){
+            Model.prev();
+        } ; 
+        Model.UI.nextDom.onclick = function(){
+            Model.next();
+        } ; 
+        Model.UI.switchDom.onclick = function(){
+            Model.isVideo = ! Model.isVideo ;
+            Model.UI.switchDom.textContent =  Model.isVideo  ? "视 频" : "音 频 " ;
+            if (! Model.isVideo) {
+                Model.UI.stageDom.removeChild(Model.UI.videoDom) ;
+            }else{
+                Model.UI.stageDom.appendChild(Model.UI.videoDom) ;
+            }
+        } ; 
+   
+    }//init 结束 ,
+  
+  
+    } ; //Model 结束
+  
+    
+    Model.init() ;
+      
+</script>
+  
+ </body>
+</html>
