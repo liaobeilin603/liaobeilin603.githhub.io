@@ -1,8 +1,8 @@
 var mediaData = {
     photoPath:"https://lixinyu945.github.io/images/",
     photoStruct:[{
-        photoName:["lijh.jpg","zhuhy.jpg","lixy.jpg","liaobl.jpg","chenzh.jpg"],
-        peopleName:["李健宏","朱红燕","李新雨","廖蓓林","陈智豪"],
+        photoName:["lijh.jpg","liaobl.jpg","zhuhy.jpg","lixy.jpg","chenzh.jpg"],
+        peopleName:["李健宏","廖蓓林","朱红燕","李新雨","陈智豪"],
     }],
     podPath: "https://jxzy-dmxy.jxstnu.edu.cn/",
     videoPath: "https://jxzy-dmxy.jxstnu.edu.cn/tedVideos/",
